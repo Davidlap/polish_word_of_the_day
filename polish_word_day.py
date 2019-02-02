@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 import requests, telegram
 from telegram.ext import Updater, CommandHandler
-
+import datetime
 
 
 def get_content_website():
@@ -33,7 +33,9 @@ def format_results(results):
     """
     Converts the dictionary into a string and gives it formatting
     """
-    final_string = ''
+    now = datetime.datetime.now().strftime("%m/%d/%y")
+    final_string = """----> POLISH WORD OF THE DAY <---- 
+                    \n           ---->    """ + str(now) + """    <----\n\n\n"""
     for k, v in results.items():
         final_string += k + " --> "
         final_string += v +'\n\n\n\n'
@@ -44,8 +46,8 @@ def send_message(message):
     """
     Using telegram library we send the message to a chat bot that has been created
     """
-    bot = telegram.Bot(token='ADD YOUR TOKEN HERE')
-    bot.sendMessage(chat_id='ADD CHAT ID HERE', text=message)
+    bot = telegram.Bot(token='ENTER YOUR TOKEN HERE')
+    bot.sendMessage(chat_id='ENTER YOUR CHAT ID HERE', text=message)
 
 
 def main():
